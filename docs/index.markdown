@@ -6,13 +6,13 @@
 
 
 
-OGV and veOGV are the governance and staked governance tokens for [Origin Dollar (OUSD)](https://ousd.com) which is a leading DeFi protocol on the Etherum blockchain. Refer to the [OUSD docs](https://docs.ousd.com/governance/ogv-staking) for more details on  how the OUSD protocol uses OGV and veOGV.
+OGV and veOGV are the governance and staked governance tokens for [Origin Dollar (OUSD)](https://ousd.com), respectively. Origin Dollar is a leading DeFi protocol for earning stablecoin yield on the Etherum blockchain. Refer to the [OUSD docs](https://docs.ousd.com/governance/ogv-staking) for more details on  how the OUSD protocol uses OGV and veOGV.
 
 # Characteristics
 
 [Curve Finance](https://curve.fi) pioneered the concept of vote-escrowed token when they released their [veCRV implementation](https://github.com/curvefi/curve-dao-contracts/blob/1086fe318b705d7d7b47f141c2aee33663c32d14/contracts/VotingEscrow.vy).
 
-veOGV's innovation resides in using an exponential decay as opposed to the linear decay used by veCRV. This allows us to significantly reduce the complexity of the smart contract logic (veOGV is 175 loc), unlocks functionality such as vote delegation and minimizes gas consumption.
+veOGV's innovation resides in using an exponential decay as opposed to the linear decay used by veCRV. This allows us to significantly reduce the complexity of the smart contract logic (veOGV is 175 loc), unlocks functionality such as vote delegation, and minimizes gas consumption.
 
 Here are the key characteristics of veOGV:
  - ERC20
@@ -20,7 +20,7 @@ Here are the key characteristics of veOGV:
  - Vote delegation
  - Configurable rewards token distribution
 
-veOGV, offers several advantages over veCRV. A trade-off is that is that with veOGV the voting power does not decay down to zero. It is a side effect of using exponential decay vs linear decay.
+veOGV offers several advantages over veCRV. A trade-off is that the voting power does not decay down to zero with veOGV. It is a side effect of using exponential decay vs linear decay.
 
 | Attribute | veOGV | veCRV |
 | ----------- | ----------- | ----------- |
@@ -41,17 +41,17 @@ The amount of veOGV allocated in return for staking OGV is calculated using this
  - veOGV is the amount of veOGV minted
  - OGV is the amount of OGV staked
  - k is a constant (for veOGV we chose a value of 1.8 but it is configurable)
- - y is the end date of the staking, as a timestamp in second
+ - y is the end date of the staking, as a timestamp in seconds
 
 This has the following properties:
 
  - After staking OGV, the staker's veOGV balance remains constant.
  - The voting power decay happens via dilution as additional veOGV tokens are minted when new stakes occur.
- - The voting power of a staker relative to the othe stakers remains constant until a new stake or unstake event occurs.
+ - The voting power of a staker relative to the other stakers remains constant until a new stake or unstake event occurs.
 
-TODO: add more details and diagrams, primary based on [DVF's notes](https://gist.github.com/DanielVF/728326db026c3f95a4e994b286a0a147)
+TODO: add more details and diagrams, primarily based on [DVF's notes](https://gist.github.com/DanielVF/728326db026c3f95a4e994b286a0a147)
 
-<img alt="chart-Linear-voting-decay-2 users" src="assets/img/chart-Linear-voting-decay-2-users.png">
+<img alt="chart-Linear-voting-decay-2 users" src="assets/img/chart-Linear-voting-decay-2users.png">
 
 <img alt="chart-Linear-decay-percentage-of-voting-power-2-users" src="assets/img/Linear-decay-percentage-of-voting-power-2-users.png">
 
@@ -70,13 +70,13 @@ TODO: add more details and diagrams, primary based on [DVF's notes](https://gist
 
 
 # Rewards
-veOGV includes a baked-in functionality to distribute rewards to the stakers. The rewards are in the form of extra OGV that are awarded relatively to the percentage of veOGV a staker holds.
+veOGV includes a baked-in functionality to distribute rewards to OGV stakers. The rewards are in the form of extra OGV that are awarded relatively to the percentage of veOGV a staker holds.
 
-The rewards schedule is configurable in tranches. A tranche is defined by a time window and amount of OGV rewards to distribute per day in said tranche. The stakers can collect their rewards at anytime.
+The rewards schedule is configurable in tranches. A tranche is defined by a time window and amount of OGV rewards to distribute per day in said tranche. The stakers can collect their rewards at any time.
 
 The distribution of rewards is optional and can be turned off if desired.
 
-<img alt="Chart-OGV-token-emissions-schedule.png" src="assets/img/OGV-token-emissions-schedule.png">
+TODO: add a diagram representing the "step function" based reward schedule.
 
 # Implementation
 
